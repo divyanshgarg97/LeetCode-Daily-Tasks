@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool canFormArray(vector<int>& arr, vector<vector<int>>& pieces) {
+        int ptr1 = 0;
+        int n = arr.size();
+        unordered_map<int,vector<int> > mp;
+        for(auto i : pieces)
+            mp[i[0]] = i;
+        while(ptr1 < n) {
+            int getfirst = arr[ptr1];
+            if(mp.find(getfirst) == mp.end()) {
+                //cout << getfirst << " ";
+                //cout<< "HERE" ;
+                return false;
+            }
+            else {
+                vector<int> temp = mp[getfirst];
+                int ptr2 = 0;
+                while((ptr2 < temp.size()) && (ptr1 < n) && (arr[ptr1] == temp[ptr2])){
+                    ptr1++;
+                    ptr2++;
+                }
+                if(ptr2 == temp.size()) continue;
+                else return false;
+            }
+        }
+        return true;
+    }
+};
